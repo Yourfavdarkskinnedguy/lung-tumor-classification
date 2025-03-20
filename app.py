@@ -8,15 +8,7 @@ import numpy as np
 
 
 app= Flask(__name__)
-model_filepath= os.path.join(os.getcwd(), 'lung_tumor.h5')
-model= load_model(model_filepath)
 
-converter= tf.lite.TFLiteConverter.from_keras_model(model)
-tflite_model= converter.convert()
-
-if not os.path.exists(os.path.join(os.getcwd(), "converted_model.tflite")):
-    with open('converted_model.tflite', 'wb') as f:     
-       f.write(tflite_model)
 
 interpreter= tf.lite.Interpreter(os.path.join(os.getcwd(), 'converted_model.tflite'))
 interpreter.allocate_tensors()
