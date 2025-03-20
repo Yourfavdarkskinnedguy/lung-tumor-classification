@@ -1,4 +1,4 @@
-giunicorn
+gunicorn
 tensorflow
 numpy
 flask
