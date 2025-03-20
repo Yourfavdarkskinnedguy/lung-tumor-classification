@@ -10,8 +10,7 @@ import numpy as np
 app= Flask(__name__)
 
 
-interpreter= tf.lite.Interpreter(os.path.join(os.getcwd(), 'converted_model.tflite'))
-interpreter.allocate_tensors()
+
 
 
 @app.route('/')
@@ -39,6 +38,9 @@ def predict():
     loaded_image= load_img(temp_filepath, target_size=(256,256))
     img_to_array= keras.preprocessing.image.img_to_array(loaded_image)
     img_to_array_expanded= np.expand_dims(img_to_array, axis=0)
+    
+    interpreter= tf.lite.Interpreter(os.path.join(os.getcwd(), 'converted_model.tflite'))
+    interpreter.allocate_tensors()
     
     input_details= interpreter.get_input_details()
     output_details= interpreter.get_output_details()
